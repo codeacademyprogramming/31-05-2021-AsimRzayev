@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 
 const api = {
-    key: "16596fe956171a7376f2ba91213e3499",
+    key: "c36c403bb67eb86c13bff234dcc06ae6",
     base: "https://api.openweathermap.org/data/2.5/",
 };
 export default function Todo() {
