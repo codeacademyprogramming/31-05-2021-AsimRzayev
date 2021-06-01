@@ -45,6 +45,12 @@ export default function Todo() {
                     <form id="todo-form" onSubmit={handleForm} name="form">
                         <div className="form-row">
                             <div className="form-group col-md-6">
+                            <label
+                            className="form-input-label"
+                            htmlFor="todo"
+                        >
+                           City Name
+                        </label>
                                 <input
                                     className="form-control"
                                     type="text"
@@ -60,8 +66,7 @@ export default function Todo() {
                             type="submit"
                             className="btn btn-danger"
                             onClick={addCity}
-                        >
-                            Add
+                        >Add
                         </button>
                     </form>
                 </div>
@@ -78,6 +83,7 @@ export default function Todo() {
                             name="flexRadioDefault"
                             id="flexRadioDefault1"
                             onClick={(evt) => setTempType("K")}
+                            value={tempType}
                             defaultChecked={true}
                         />
                         <label
@@ -88,11 +94,13 @@ export default function Todo() {
                         </label>
                     </div>
                     <div className="form-check">
+                        
                         <input
                             className="form-check-input"
                             type="radio"
                             name="flexRadioDefault"
                             id="flexRadioDefault2"
+                            value={tempType}
                             onClick={(evt) => setTempType("C")}
                         />
                         <label
@@ -108,6 +116,7 @@ export default function Todo() {
                             type="radio"
                             name="flexRadioDefault"
                             id="flexRadioDefault3"
+                            value={tempType}
                             onClick={(evt) => setTempType("F")}
                         />
 
@@ -119,7 +128,7 @@ export default function Todo() {
                         </label>
                     </div>
                     <hr />
-                    <ul className="list-group">
+                    <ul data-testid="testId" className="list-group" >
                         {cities.map((city, idx) => {
                             let val = 0;
                             if (tempType === "C") {
@@ -132,7 +141,7 @@ export default function Todo() {
                                 val = ((city.temp - 273.15) * 9) / 5 + 32;
                             }
                             return (
-                                <li
+                                <li 
                                     key={idx}
                                     className="list-group-item d-flex justify-content-between"
                                 >
