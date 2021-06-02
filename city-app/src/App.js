@@ -1,10 +1,10 @@
 import './App.css';
-import Todo from './components/Todo';
+import Weather from './components/Todo';
 
 function App() {
   return (
     <div >
-      <Todo/>
+      <Weather/>
     </div>
   );
 }

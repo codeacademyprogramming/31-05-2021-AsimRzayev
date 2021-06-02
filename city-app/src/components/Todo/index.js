@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from "react";
-
+import WeatherList from './WeatherList'
 const api = {
     key: "c36c403bb67eb86c13bff234dcc06ae6",
     base: "https://api.openweathermap.org/data/2.5/",
 };
-export default function Todo() {
+export default function Weather() {
     const [query, setQuery] = useState("");
     let [cities, setcity] = useState([]);
     const [tempType, setTempType] = useState("K");
@@ -15,7 +15,6 @@ export default function Todo() {
             )
                 .then((res) => res.json())
                 .then((result) => {
-                    setQuery("");
 
                     setcity([
                         ...cities,
@@ -27,9 +26,9 @@ export default function Todo() {
                 });
         }
     };
-
+ 
     const deleteItem = useCallback(
-        (cityName) => {
+     (cityName) => {
             setcity(cities.filter((city) => city.name !== cityName));
         },
         [cities]
@@ -128,46 +127,17 @@ export default function Todo() {
                         </label>
                     </div>
                     <hr />
-                    <ul data-testid="testId" className="list-group" >
-                        {cities.map((city, idx) => {
-                            let val = 0;
-                            if (tempType === "C") {
-                                val = city.temp - 273.15;
-                            }
-                            if (tempType === "K") {
-                                val = city.temp;
-                            }
-                            if (tempType === "F") {
-                                val = ((city.temp - 273.15) * 9) / 5 + 32;
-                            }
-                            return (
-                                <li 
-                                    key={idx}
-                                    className="list-group-item d-flex justify-content-between"
-                                >
-                                    <h3>
-                                        {city.name}➠{val.toFixed(1)} {tempType}
-                                    </h3>
-                                    <button
-                                        type="submit"
-                                        onClick={(evt) => deleteItem(city.name)}
-                                        className="bg-transparent"
-                                    >
-                                        <i className="fas fa-times"></i>
-                                    </button>
-                                </li>
-                            );
-                        })}
-                    </ul>
+                    <WeatherList cities={cities} tempType={tempType} deleteItem={deleteItem}/>
+                   
                     <hr />
-                    <a
+                    <button
                         id="clear-todos"
                         className="btn btn-dark"
                         href="/"
                         onClick={(evt) => setcity([])}
                     >
                         Clear All
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
